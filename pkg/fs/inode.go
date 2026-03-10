@@ -43,5 +43,11 @@ func (i *Inode) serialize() []byte {
 	buf := make([]byte, InodeSize)
 
 	binary.BigEndian.PutUint16(buf, uint16(i.Type))
+	binary.BigEndian.PutUint64(buf[1:9], i.Size)
+	buf[9] = i.BlockCount
+	// TODO: add block pointers
+	binary.BigEndian.PutUint64(buf[110:118], uint64(i.CreatedAt))
+	binary.BigEndian.PutUint64(buf[118:126], uint64(i.UpdatedAt))
 
+	return buf
 }
