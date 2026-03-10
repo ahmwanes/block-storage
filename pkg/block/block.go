@@ -176,6 +176,18 @@ func (bd *BlockDevice) ReadBlock(blockNum uint64) ([]byte, error) {
 	return decryptedBlock, nil
 }
 
+func (bd *BlockDevice) WipeDevice() error {
+	zero := make([]byte, bd.blockSize)
+
+	for i := uint64(0); i < bd.blockCount; i++ {
+		if err := bd.WriteBlock(i, zero); err != nil {
+			return fmt.Errorf("%w - %v", ErrFailedToWipeDevice, err)
+		}
+	}
+
+	return nil
+}
+
 // Close closes the BlockDevice file.
 func (bd *BlockDevice) Close() error {
 	return bd.file.Close()

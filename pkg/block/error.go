@@ -10,6 +10,7 @@ var (
 	ErrFailedToReadBlock    = errors.New("failed to read block")
 	ErrBlockOutOfRange      = errors.New("block out of range")
 	ErrInvalidDevice        = errors.New("invalid device: not a valid BFS encrypted disk")
+	ErrFailedToWipeDevice   = errors.New("failed to wipe device")
 
 	// Encryption Errors
 	ErrFailedToCreateKey    = errors.New("failed to create encryption key")

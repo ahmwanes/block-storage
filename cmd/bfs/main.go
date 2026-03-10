@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/ahmwanes/bfs/pkg/block"
+	"github.com/ahmwanes/bfs/pkg/fs"
 )
 
 func main() {
@@ -12,16 +11,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer d.Close()
 
-	w := []byte("Hello World!")
-
-	d.WriteBlock(0, w)
-	d.WriteBlock(100, w)
-
-	r, err := d.ReadBlock(0)
+	_, err = fs.NewFS(d)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(r))
 
 }
